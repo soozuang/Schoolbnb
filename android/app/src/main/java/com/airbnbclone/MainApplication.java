@@ -1,4 +1,4 @@
-package com.airbnbclone;
+package com.schoolbnb;
 
 import android.app.Application;
 
