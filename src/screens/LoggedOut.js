@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -26,6 +25,12 @@ if (size === 'small') {
 
 export default class LoggedOut extends Component {
 
+
+  constructor(props) {
+    super(props);
+    this.onCreateAccountPress = this.onCreateAccountPress.bind(this)
+  }
+
   static navigationOptions = ({ navigation }) => ({
     headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('LogIn')} location="right" color={colors.white} text="Log In" />,
     headerStyle: transparentHeaderStyle,
@@ -37,7 +42,8 @@ export default class LoggedOut extends Component {
   }
 
   onCreateAccountPress() {
-    alert('Create Account button pressed');
+    const { navigate } = this.props.navigation;
+    navigate('CreateAccount');
   }
 
   onMoreOptionsPress() {
@@ -57,7 +63,7 @@ export default class LoggedOut extends Component {
             text="Continue with Facebook"
             textColor={colors.green01}
             background={colors.white}
-            icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon}/>}
+            icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
             handleOnPress={this.onFacebookPress}
           />
           <RoundedButton
@@ -73,27 +79,27 @@ export default class LoggedOut extends Component {
             <Text style={styles.moreOptionsButtonText}>More options</Text>
           </TouchableHighlight>
 
-         <View style={styles.termsAndConditions}>
-           <Text style={styles.termsText}>By tapping Continue, Create Account or More</Text>
-           <Text style={styles.termsText}>options, </Text>
-           <Text style={styles.termsText}>I agree to Airbnb's </Text>
-           <TouchableHighlight style={styles.linkButton}>
-             <Text style={styles.termsText}>Terms of Service</Text>
-           </TouchableHighlight>
-           <Text style={styles.termsText}>, </Text>
-           <TouchableHighlight style={styles.linkButton}>
-             <Text style={styles.termsText}>Payments Terms of Service</Text>
-           </TouchableHighlight>
-           <Text style={styles.termsText}>, </Text>
-           <TouchableHighlight style={styles.linkButton}>
-             <Text style={styles.termsText}>Privacy Policy</Text>
-           </TouchableHighlight>
-           <Text style={styles.termsText}>, and </Text>
-           <TouchableHighlight style={styles.linkButton}>
-             <Text style={styles.termsText}>Nondiscrimination Policy</Text>
-           </TouchableHighlight>
-           <Text style={styles.termsText}>.</Text>
-         </View>
+          <View style={styles.termsAndConditions}>
+            <Text style={styles.termsText}>Đồng nghĩa với tiếp tục sử dụng các tính năng của</Text>
+            <Text style={styles.termsText}>chương trình. </Text>
+            <Text style={styles.termsText}>Tôi đồng ý với </Text>
+            <TouchableHighlight style={styles.linkButton}>
+              <Text style={styles.termsText}>Điều khoản</Text>
+            </TouchableHighlight>
+            <Text style={styles.termsText}>, </Text>
+            <TouchableHighlight style={styles.linkButton}>
+              <Text style={styles.termsText}>Chính sách</Text>
+            </TouchableHighlight>
+            <Text style={styles.termsText}>, </Text>
+            <TouchableHighlight style={styles.linkButton}>
+              <Text style={styles.termsText}>Bảo mật</Text>
+            </TouchableHighlight>
+            <Text style={styles.termsText}> của </Text>
+            <TouchableHighlight style={styles.linkButton}>
+              <Text style={styles.termsText}>Travelbnb</Text>
+            </TouchableHighlight>
+            <Text style={styles.termsText}>.</Text>
+          </View>
         </View>
       </ScrollView>
     );

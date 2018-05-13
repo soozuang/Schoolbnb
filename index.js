@@ -4,5 +4,6 @@ import {
 } from 'react-native';
 import App from './App';
 
-StatusBar.setBarStyle('light-content', true);
+
+StatusBar.setHidden(true)
 AppRegistry.registerComponent('Schoolbnb', () => App);

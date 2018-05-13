@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import {
   View,
@@ -66,6 +64,7 @@ export default class ForgotPassword extends Component {
   }
 
   goToNextStep() {
+    const { navigate } = this.props.navigation;
     this.setState({ loadingVisible: true });
     setTimeout(() => {
       if (this.state.emailAddress === 'wrong@email.com') {
@@ -79,6 +78,7 @@ export default class ForgotPassword extends Component {
           formValid: true,
         });
       }
+      navigate('LogIn');
     }, 2000);
   }
 

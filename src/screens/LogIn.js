@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
+  Alert,
   View,
   Text,
   ScrollView,
@@ -12,13 +13,14 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../redux/actions';
-import colors from '../styles/colors'; 
+import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import InputField from '../components/form/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
 import Loader from '../components/Loader';
 import NavBarButton from '../components/buttons/NavBarButton';
+import { firebaseApp } from '../components/FirebaseConfig';
 import iPhoneSize from '../helpers/utils';
 
 const size = iPhoneSize();
@@ -34,7 +36,7 @@ class LogIn extends Component {
       handleButtonPress={() => navigation.navigate('ForgotPassword')}
       location="right"
       color={colors.white}
-      text="Forgot Password"
+      text="Quên mật khẩu"
     />,
     headerLeft: <NavBarButton
       handleButtonPress={() => navigation.goBack()}
@@ -64,18 +66,27 @@ class LogIn extends Component {
   }
 
   handleNextButton() {
-  	this.setState({ loadingVisible: true });
     const { navigate } = this.props.navigation;
+    const { emailAddress, password } = this.state;
 
-  	setTimeout(() => {
-      const { emailAddress, password } = this.state;
-      if (this.props.logIn(emailAddress, password)) {
-        this.setState({ formValid: true, loadingVisible: false });
-        navigate('TurnOnNotifications');
-      } else {
+    // if (this.props.logIn(emailAddress, password)) {
+    //   this.setState({ formValid: true, loadingVisible: false });
+    //   navigate('TurnOnNotifications');
+    // } else {
+    //   this.setState({ formValid: false, loadingVisible: false });
+    // }
+
+    firebaseApp.auth().signInWithEmailAndPassword(emailAddress, password)
+      .then(() => {
+        setTimeout(() => {
+          this.setState({ formValid: true, loadingVisible: false });
+        }, 2000);
+        navigate('TurnOnNotifications')
+      })
+      .catch((error) => {
         this.setState({ formValid: false, loadingVisible: false });
-      }
-    }, 2000);
+      });
+
   }
 
   handleCloseNotification() {
@@ -88,11 +99,11 @@ class LogIn extends Component {
 
     if (!this.state.validEmail) {
       if (emailCheckRegex.test(email)) {
-      	this.setState({ validEmail: true });
+        this.setState({ validEmail: true });
       }
     } else {
       if (!emailCheckRegex.test(email)) {
-      	this.setState({ validEmail: false });
+        this.setState({ validEmail: false });
       }
     }
   }
@@ -101,11 +112,11 @@ class LogIn extends Component {
     this.setState({ password });
 
     if (!this.state.validPassword) {
-      if (password.length > 4) {
-      	//Password has to be at least 4 characters long
-      	this.setState({ validPassword: true });
+      if (password.length > 7) {
+        //Password has to be at least 4 characters long
+        this.setState({ validPassword: true });
       }
-    } else if (password <= 4) {
+    } else if (password <= 7) {
       this.setState({ validPassword: false });
     }
   }
@@ -119,38 +130,38 @@ class LogIn extends Component {
   }
 
   render() {
-  	const { formValid, loadingVisible, validEmail, validPassword } = this.state;
-  	const showNotification = formValid ? false : true;
-  	const background = formValid ? colors.green01 : colors.darkOrange;
-  	const notificationMarginTop = showNotification ? 10 : 0;
+    const { formValid, loadingVisible, validEmail, validPassword } = this.state;
+    const showNotification = formValid ? false : true;
+    const background = formValid ? colors.green01 : colors.darkOrange;
+    const notificationMarginTop = showNotification ? 10 : 0;
     return (
       <KeyboardAvoidingView
-        style={[{backgroundColor: background}, styles.wrapper]}
+        style={[{ backgroundColor: background }, styles.wrapper]}
         behavior="padding"
-       >
+      >
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Log In</Text>
             <InputField
-              labelText="EMAIL ADDRESS"
+              labelText="ĐỊA CHỈ EMAIL"
               labelTextSize={14}
               labelColor={colors.white}
               textColor={colors.white}
               borderBottomColor={colors.white}
               inputType="email"
-              customStyle={{marginBottom: 30}}
+              customStyle={{ marginBottom: 30 }}
               onChangeText={this.handleEmailChange}
               showCheckmark={validEmail}
               autoFocus={true}
             />
             <InputField
-              labelText="PASSWORD"
+              labelText="MẬT KHẨU"
               labelTextSize={14}
               labelColor={colors.white}
               textColor={colors.white}
               borderBottomColor={colors.white}
               inputType="password"
-              customStyle={{marginBottom: 30}}
+              customStyle={{ marginBottom: 30 }}
               onChangeText={this.handlePasswordChange}
               showCheckmark={validPassword}
             />
@@ -164,13 +175,13 @@ class LogIn extends Component {
           modalVisible={loadingVisible}
           animationType="fade"
         />
-        <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}>
+        <View style={[styles.notificationWrapper, { marginTop: notificationMarginTop }]}>
           <Notification
             showNotification={showNotification}
             handleCloseNotification={this.handleCloseNotification}
-            type="Error"
-            firstLine="Those credentials don't look right."
-            secondLine="Please try again."
+            type="Lỗi"
+            firstLine="Tên đăng nhập hoặc mật khẩu không đúng."
+            secondLine="Vui lòng thử lại."
           />
         </View>
       </KeyboardAvoidingView>
@@ -206,8 +217,8 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   notificationWrapper: {
-  	position: 'absolute',
-  	bottom: 0,
+    position: 'absolute',
+    bottom: 0,
     left: 0,
     right: 0,
   }
