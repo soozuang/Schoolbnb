@@ -97,12 +97,12 @@ export default class ForgotPassword extends Component {
       >
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
-            <Text style={styles.forgotPasswordHeading}>Forgot your password?</Text>
-            <Text style={styles.forgotPasswordSubheading}>Enter your email to find your account</Text>
+            <Text style={styles.forgotPasswordHeading}>Tìm lại mật khẩu</Text>
+            <Text style={styles.forgotPasswordSubheading}>Nhập vào email của bạn</Text>
             <InputField
               customStyle={{marginBottom: 30}}
               textColor={colors.white}
-              labelText="EMAIL ADDRESS"
+              labelText="ĐỊA CHỈ EMAIL"
               labelTextSize={14}
               labelColor={colors.white}
               borderBottomColor={colors.white}
@@ -124,9 +124,9 @@ export default class ForgotPassword extends Component {
           <Notification
             showNotification={showNotification}
             handleCloseNotification={this.handleCloseNotification}
-            type="Error"
-            firstLine="No account exists for the requested"
-            secondLine="email address."
+            type="Lỗi"
+            firstLine="Không tìm thấy địa chỉ email"
+            secondLine="Email."
           />
         </View>
       </KeyboardAvoidingView>

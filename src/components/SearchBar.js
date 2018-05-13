@@ -19,7 +19,7 @@ export default class SearchBar extends Component {
 	        color={colors.gray02}
             style={styles.searchIcon}
 	      />
-  	      <Text style={styles.textInput}>Try "Cape Town"</Text>
+  	      <Text style={styles.textInput}>Tra cứu mã trường, tên trường</Text>
   	    </View>
   	  </View>
   	);

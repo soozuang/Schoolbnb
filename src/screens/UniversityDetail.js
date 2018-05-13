@@ -20,7 +20,7 @@ import InputField from '../components/form/InputField';
 import RadioInput from '../components/form/RadioInput';
 import RoundedButton from '../components/buttons/RoundedButton';
 
-class CreateList extends Component {
+class UniversityDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarVisible: false,
     headerLeft: <TouchableOpacity
@@ -41,8 +41,7 @@ class CreateList extends Component {
 
     this.state = {
       privacyOption: 'private',
-      location: props.navigation.state.params.listing.location,
-      loading: false,
+      
     };
     
     this.listCreated = false;
@@ -53,7 +52,7 @@ class CreateList extends Component {
 
   componentWillUnmount() {
     const { navigation } = this.props;
-    navigation.state.params.onCreateListClose(navigation.state.params.listing.id, this.listCreated);
+    navigation.state.params.onDetailClose();
   }
 
   selectPrivacyOption(privacyOption) {
@@ -79,11 +78,11 @@ class CreateList extends Component {
 
   render() {
     const { privacyOption, location } = this.state;
-
+    const { navigation } = this.props;
     return (
       <View style={styles.wrapper}>
         <ScrollView style={styles.scrollView}>
-          <Text style={styles.heading}>Thêm vào ưa thích</Text>
+          <Text style={styles.heading}>{navigation.state.params.listing.title}</Text>
           <View style={styles.content}>
             <View style={styles.inputWrapper}>
               <InputField
@@ -258,4 +257,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(ActionCreators, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(CreateList);
+export default connect(null, mapDispatchToProps)(UniversityDetail);

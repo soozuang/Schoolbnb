@@ -1,4 +1,4 @@
-package com.schoolbnb;
+package com.VNUFinder;
 
 import android.app.Application;
 

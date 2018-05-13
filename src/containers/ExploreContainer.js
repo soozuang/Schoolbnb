@@ -14,7 +14,7 @@ import colors from '../styles/colors';
 import categoriesList from '../data/categories';
 import listings from '../data/listings';
 
-export default class InboxContainer extends Component {
+export default class ExploreContainer extends Component {
   static navigationOptions = {
     header: null,
     tabBarLabel: 'EXPLORE',
@@ -33,12 +33,18 @@ export default class InboxContainer extends Component {
       favouriteListings: [],
     };
     this.handleAddToFav = this.handleAddToFav.bind(this);
+    this.showDetail = this.showDetail.bind(this);
     this.renderListings = this.renderListings.bind(this);
     this.onCreateListClose = this.onCreateListClose.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
+  }
+
+  showDetail(listing) {
+    const { navigate } = this.props.navigation;
+    navigate('UniversityDetail', {listing, onDetailsClose: this.onDetailClose})
   }
 
   handleAddToFav(listing) {
@@ -52,6 +58,10 @@ export default class InboxContainer extends Component {
     } else {
       navigate('CreateList', {listing, onCreateListClose: this.onCreateListClose});
     }
+  }
+
+  onDetailClose() {
+    //
   }
 
   onCreateListClose(listingId, listCreated) {
@@ -76,6 +86,7 @@ export default class InboxContainer extends Component {
             boldTitle={listing.boldTitle}
             listings={listing.listings}
             showAddToFav={listing.showAddToFav}
+            showDetail = {this.showDetail}
             handleAddToFav={this.handleAddToFav}
             favouriteListings={this.state.favouriteListings}
           />
@@ -92,7 +103,7 @@ export default class InboxContainer extends Component {
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
         >
-          <Text style={styles.heading}>Explore Airbnb</Text>
+          <Text style={styles.heading}>Danh sách các trường đại học Việt Nam</Text>
           <View style={styles.categories}>
             <Categories categories={categoriesList} />
           </View>
@@ -118,7 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   heading: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: '600',
     paddingLeft: 20,
     paddingBottom: 20,

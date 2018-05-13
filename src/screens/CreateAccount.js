@@ -117,14 +117,6 @@ export default class ForgotPassword extends Component {
         })
         .catch((error) => {
           this.setState({ formValid: false, loadingVisible: false });
-          // Alert.alert(
-          //   'Lỗi: ',
-          //   ''+error,
-          //   [
-          //     { text: 'OK', onPress: () => {}},
-          //   ],
-          //   { cancelable: false }
-          //)
         });
     }
   }

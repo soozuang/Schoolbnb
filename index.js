@@ -6,4 +6,4 @@ import App from './App';
 
 
 StatusBar.setHidden(true)
-AppRegistry.registerComponent('Schoolbnb', () => App);
+AppRegistry.registerComponent('VNUFinder', () => App);

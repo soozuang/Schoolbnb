@@ -1,5 +1,6 @@
 {
-  "name": "Schoolbnb",
-  "displayName": "Schoolbnb",
-  "expo": { "sdkVersion": "18.0.0" }
+  "name": "VNUFinder",
+  "displayName": "VNUFinder",
+  "expo": { "sdkVersion": "18.0.0" },
+  "icon": "app_logo.png"
 }

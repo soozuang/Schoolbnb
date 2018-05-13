@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import NoResults from '../components/saved/NoResults';
 import colors from '../styles/colors';
 
-export default class InboxContainer extends Component {
+export default class SavedContainer extends Component {
   static navigationOptions = {
     tabBarLabel: 'SAVED',
     tabBarIcon: ({ tintColor }) => (

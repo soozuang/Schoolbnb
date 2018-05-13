@@ -32,7 +32,7 @@ export default class LoggedOut extends Component {
   }
 
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('LogIn')} location="right" color={colors.white} text="Log In" />,
+    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('LogIn')} location="right" color={colors.white} text="Đăng nhập" />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white,
   });
@@ -55,50 +55,45 @@ export default class LoggedOut extends Component {
       <ScrollView style={styles.wrapper}>
         <View style={styles.welcomeWrapper}>
           <Image
-            source={require('../img/airbnb-logo.png')}
+            source={require('../img/VNUFinder.gif')}
             style={styles.logo}
           />
-          <Text style={styles.welcomeText}>Welcome to Airbnb.</Text>
+          <Text style={styles.welcomeText}>Chào mừng bạn đến với VNUFinder</Text>
           <RoundedButton
-            text="Continue with Facebook"
+            text="Đăng nhập với Facebook"
             textColor={colors.green01}
             background={colors.white}
             icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
             handleOnPress={this.onFacebookPress}
           />
           <RoundedButton
-            text="Create Account"
+            text="Tạo tài khoản mới"
             textColor={colors.white}
             handleOnPress={this.onCreateAccountPress}
           />
 
-          <TouchableHighlight
+          {/* <TouchableHighlight
             style={styles.moreOptionsButton}
             onPress={this.onMoreOptionsPress}
           >
             <Text style={styles.moreOptionsButtonText}>More options</Text>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
 
           <View style={styles.termsAndConditions}>
-            <Text style={styles.termsText}>Đồng nghĩa với tiếp tục sử dụng các tính năng của</Text>
-            <Text style={styles.termsText}>chương trình. </Text>
-            <Text style={styles.termsText}>Tôi đồng ý với </Text>
+            <Text style={styles.termsText}>Khi tiếp tục sử dụng các tính năng của</Text>
+            <Text style={styles.termsText}>chương trình, </Text>
+            <Text style={styles.termsText}>bạn đã đồng ý với </Text>
             <TouchableHighlight style={styles.linkButton}>
               <Text style={styles.termsText}>Điều khoản</Text>
             </TouchableHighlight>
             <Text style={styles.termsText}>, </Text>
             <TouchableHighlight style={styles.linkButton}>
-              <Text style={styles.termsText}>Chính sách</Text>
+              <Text style={styles.termsText}>Chính sách bảo mật </Text>
             </TouchableHighlight>
-            <Text style={styles.termsText}>, </Text>
+            <Text style={styles.termsText}>của </Text>
             <TouchableHighlight style={styles.linkButton}>
-              <Text style={styles.termsText}>Bảo mật</Text>
+              <Text style={styles.termsText}>VNUFinder</Text>
             </TouchableHighlight>
-            <Text style={styles.termsText}> của </Text>
-            <TouchableHighlight style={styles.linkButton}>
-              <Text style={styles.termsText}>Travelbnb</Text>
-            </TouchableHighlight>
-            <Text style={styles.termsText}>.</Text>
           </View>
         </View>
       </ScrollView>
@@ -119,10 +114,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   logo: {
-    width: 50,
-    height: 50,
-    marginTop: 50,
-    marginBottom: 40,
+    width: 70,
+    height: 70,
+    marginTop: 25,
+    marginBottom: 35,
   },
   welcomeText: {
     fontSize: headingTextSize,

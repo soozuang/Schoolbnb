@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 import AppWithNavigationState from './src/navigators/AppNavigator';
+import { StatusBar } from 'react-native';
 
 console.disableYellowBox = true;
 

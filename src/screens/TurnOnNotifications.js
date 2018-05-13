@@ -65,10 +65,10 @@ export default class TurnOnNotifications extends Component {
   	        style={styles.icon}
   	      />
   	      <Text style={styles.title}>
-  	        Turn on notifications?
+  	        Bật thông báo?
   	      </Text>
   	      <Text style={styles.description}>
-  	        We can let you know when someone messages you, or notify you about other important account activity.
+  	        Chúng tôi sẽ thông báo cho bạn những tin quan trọng
   	      </Text>
   	      <TouchableHighlight
   	        style={[{ backgroundColor: pressNotifyBtn ? colors.green02 : colors.green01 }, styles.notifyButton]}
@@ -77,7 +77,7 @@ export default class TurnOnNotifications extends Component {
   	        onHideUnderlay={this.handleNotifyBtnHideUnderlay}
   	        underlayColor={colors.green02}
   	      >
-  	        <Text style={[{ color: colors.white }, styles.buttonText]}>Yes, notify me</Text>
+  	        <Text style={[{ color: colors.white }, styles.buttonText]}>Thông báo cho tôi</Text>
   	      </TouchableHighlight>
   	      <TouchableHighlight
   	        style={[{ backgroundColor: pressSkipBtn ? colors.gray01 : 'transparent' }, styles.skipButton]}
@@ -86,7 +86,7 @@ export default class TurnOnNotifications extends Component {
   	        onHideUnderlay={this.handleSkipBtnHideUnderlay}
   	        underlayColor={colors.gray01}
   	      >
-  	        <Text style={[{ color: colors.green01 }, styles.buttonText]}>Skip</Text>
+  	        <Text style={[{ color: colors.green01 }, styles.buttonText]}>Bỏ qua</Text>
   	      </TouchableHighlight>
   	    </View> 
   	  </View>

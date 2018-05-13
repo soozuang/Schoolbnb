@@ -1,16 +1,16 @@
  
 const categoriesList = [
   {
-  	name: 'Homes',
-  	photo: require('./photos/homesCategory.png'),
+  	name: 'Miền Bắc',
+  	photo: require('./photos/logovn.png'),
   },
   {
-  	name: 'Experiences',
-  	photo: require('./photos/experiencesCategory.png'),
+  	name: 'Miền Trung',
+  	photo: require('./photos/logovn.png'),
   },
   {
-  	name: 'Restaurants',
-  	photo: require('./photos/restaurantsCategory.png'),
+  	name: 'Miền Nam',
+  	photo: require('./photos/logovn.png'),
   }
 ];
 

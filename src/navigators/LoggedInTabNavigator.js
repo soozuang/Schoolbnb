@@ -9,11 +9,13 @@ import ProfileContainer from '../containers/ProfileContainer';
 import SavedContainer from '../containers/SavedContainer';
 import TripsContainer from '../containers/TripsContainer';
 import CreateList from '../screens/CreateList';
+import UniversityDetail from '../screens/UniversityDetail'
 import colors from '../styles/colors';
 
 export const ExploreTab = StackNavigator({
   ExploreContainer: { screen: ExploreContainer },
   CreateList: { screen: CreateList },
+  UniversityDetail: { screen: UniversityDetail}
 },
 {
   mode: 'modal',
@@ -22,9 +24,8 @@ export const ExploreTab = StackNavigator({
 const LoggedInTabNavigator = TabNavigator({
   Explore: ExploreTab,
   Saved: { screen: SavedContainer },
-  Trips: { screen: TripsContainer }, 
   Inbox: { screen:  InboxContainer },
-  Profile: { screen: ProfileContainer },
+  Profile: { screen: ProfileContainer, navigationOptions: { header: { visible: false } }  },
 }, {
   tabBarOptions: {
   	labelStyle: {

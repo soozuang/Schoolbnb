@@ -69,18 +69,10 @@ class LogIn extends Component {
     const { navigate } = this.props.navigation;
     const { emailAddress, password } = this.state;
 
-    // if (this.props.logIn(emailAddress, password)) {
-    //   this.setState({ formValid: true, loadingVisible: false });
-    //   navigate('TurnOnNotifications');
-    // } else {
-    //   this.setState({ formValid: false, loadingVisible: false });
-    // }
-
     firebaseApp.auth().signInWithEmailAndPassword(emailAddress, password)
       .then(() => {
-        setTimeout(() => {
-          this.setState({ formValid: true, loadingVisible: false });
-        }, 2000);
+        this.setState({ formValid: true, loadingVisible: false })
+        this.props.logIn(emailAddress, password)
         navigate('TurnOnNotifications')
       })
       .catch((error) => {
@@ -141,7 +133,7 @@ class LogIn extends Component {
       >
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
-            <Text style={styles.loginHeader}>Log In</Text>
+            <Text style={styles.loginHeader}>Đăng nhập</Text>
             <InputField
               labelText="ĐỊA CHỈ EMAIL"
               labelTextSize={14}

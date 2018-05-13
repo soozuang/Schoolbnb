@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default class InboxContainer extends Component {
+export default class ProfileContainer extends Component {
   static navigationOptions = {
     tabBarLabel: 'PROFILE',
     tabBarIcon: ({ tintColor }) => (
