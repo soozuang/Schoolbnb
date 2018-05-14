@@ -19,21 +19,28 @@ import { transparentHeaderStyle } from '../styles/navigation';
 import InputField from '../components/form/InputField';
 import RadioInput from '../components/form/RadioInput';
 import RoundedButton from '../components/buttons/RoundedButton';
+import NavBarButton from '../components/buttons/NavBarButton';
 
 class CreateList extends Component {
+
   static navigationOptions = ({ navigation }) => ({
-    tabBarVisible: false,
+    tabBarVisible: true,
     headerLeft: <TouchableOpacity
       style={styles.closeButton}
       onPress={() => navigation.goBack()}
     >
-      <Icon
-        name="md-close"
-        size={30}
-        color={colors.lightBlack}
-      />
+      <Icon name="ios-arrow-back" color={colors.green01} size={30} />
     </TouchableOpacity>,
-    headerStyle: styles.headerStyle,
+    headerStyle: transparentHeaderStyle,
+    headerTintColor: colors.white,
+    tabBarLabel: 'KHÁM PHÁ',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon
+        name="ios-search"
+        size={22}
+        color={tintColor}
+      />
+    ),
   });
 
   constructor(props) {
@@ -44,7 +51,7 @@ class CreateList extends Component {
       location: props.navigation.state.params.listing.location,
       loading: false,
     };
-    
+
     this.listCreated = false;
     this.selectPrivacyOption = this.selectPrivacyOption.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
@@ -57,21 +64,21 @@ class CreateList extends Component {
   }
 
   selectPrivacyOption(privacyOption) {
-    this.setState({privacyOption});
+    this.setState({ privacyOption });
   }
 
   handleLocationChange(location) {
-    this.setState({location});
+    this.setState({ location });
   }
 
   handleCreateList() {
     const { goBack } = this.props.navigation;
-    this.setState({loading: true});
+    this.setState({ loading: true });
     this.listCreated = true;
 
     // Faking slow server
     setTimeout(() => {
-      this.setState({loading: false}, () => {
+      this.setState({ loading: false }, () => {
         goBack();
       });
     }, 1000);
@@ -79,7 +86,6 @@ class CreateList extends Component {
 
   render() {
     const { privacyOption, location } = this.state;
-
     return (
       <View style={styles.wrapper}>
         <ScrollView style={styles.scrollView}>
@@ -96,7 +102,7 @@ class CreateList extends Component {
                 value={location}
                 borderBottomColor={colors.gray06}
                 inputType="email"
-                inputStyle={{fontSize: 18, fontWeight: '400', paddingBottom: 30}}
+                inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 30 }}
                 onChangeText={this.handleLocationChange}
                 showCheckmark={false}
                 autoFocus={true}
@@ -189,12 +195,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   heading: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: '800',
     color: colors.lightBlack,
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 15,
+    marginTop: 40,
   },
   privacyOptions: {
     marginTop: 40,

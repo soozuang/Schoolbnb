@@ -17,7 +17,7 @@ import listings from '../data/listings';
 export default class ExploreContainer extends Component {
   static navigationOptions = {
     header: null,
-    tabBarLabel: 'EXPLORE',
+    tabBarLabel: 'KHÁM PHÁ',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-search"
@@ -44,7 +44,7 @@ export default class ExploreContainer extends Component {
 
   showDetail(listing) {
     const { navigate } = this.props.navigation;
-    navigate('UniversityDetail', {listing, onDetailsClose: this.onDetailClose})
+    navigate('UniversityDetail', {listing, onDetailClose: this.onDetailClose})
   }
 
   handleAddToFav(listing) {
@@ -61,7 +61,7 @@ export default class ExploreContainer extends Component {
   }
 
   onDetailClose() {
-    //
+    // Nothing to do
   }
 
   onCreateListClose(listingId, listCreated) {
@@ -116,7 +116,7 @@ export default class ExploreContainer extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flex: 1,    
     backgroundColor: colors.white,
   },
   scrollview: {

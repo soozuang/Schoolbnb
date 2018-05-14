@@ -32,36 +32,37 @@ export default class Listings extends Component {
           onPress={() => showDetail(listing)}
         >
           <View>
-            {showAddToFav ?
-              <View style={styles.addToFavoriteBtn}>
-                <HeartButton
-                  color={colors.white}
-                  selectedColor={colors.pink}
-                  selected={favouriteListings.indexOf(listing.id) > -1}
-                  onPress={() => handleAddToFav(listing)}
-                />
-              </View>
-              : null}
             <Image
               style={styles.image}
               resizeMode="contain"
-              source={listing.photo}
+              source={{ uri: listing.logo }}
             />
             <Text style={[{ color: listing.color }, styles.listingType]}>{listing.type}</Text>
             <Text
               style={styles.listingTitle}
               numberOfLines={2}
             >
-              {listing.title}
+              {listing.tentruong}
             </Text>
-            <Text style={styles.listingPrice}>${listing.price} {listing.priceType}</Text>
-            {listing.stars > 0 ?
+            <Text style={styles.listingPrice}>{listing.matruong}</Text>
+            <View style={styles.fav_star}>
               <Stars
-                votes={listing.stars}
+                //votes={listing.stars}
                 size={10}
                 color={colors.green02}
               />
-              : null}
+              <View style = {styles.heartbtn}>
+                <HeartButton
+                  color={colors.gray02}
+                  selectedColor={colors.pink}
+                  selected={favouriteListings.indexOf(listing.id) > -1}
+                  onPress={() => handleAddToFav(listing)}
+                />
+              </View>
+
+            </View>
+
+
           </View>
         </TouchableOpacity>
       );
@@ -172,5 +173,15 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     fontSize: 12,
     fontWeight: '300',
+  },
+  fav_star: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+
+  heartbtn: {
+    position: 'absolute',
+    right: 16,
+    bottom: 1
   }
 });

@@ -32,7 +32,7 @@ export default class LoggedOut extends Component {
   }
 
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('LogIn')} location="right" color={colors.white} text="Đăng nhập" />,
+    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('TurnOnNotifications')} location="right" color={colors.white} text="Đăng nhập" />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white,
   });
@@ -91,9 +91,7 @@ export default class LoggedOut extends Component {
               <Text style={styles.termsText}>Chính sách bảo mật </Text>
             </TouchableHighlight>
             <Text style={styles.termsText}>của </Text>
-            <TouchableHighlight style={styles.linkButton}>
-              <Text style={styles.termsText}>VNUFinder</Text>
-            </TouchableHighlight>
+            <Text style={styles.termsText}>VNUFinder</Text>
           </View>
         </View>
       </ScrollView>

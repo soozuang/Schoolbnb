@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class InboxContainer extends Component {
   static navigationOptions = {
-    tabBarLabel: 'INBOX',
+    tabBarLabel: 'HỘP THƯ',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-archive-outline"

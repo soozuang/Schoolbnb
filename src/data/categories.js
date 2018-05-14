@@ -2,15 +2,15 @@
 const categoriesList = [
   {
   	name: 'Miền Bắc',
-  	photo: require('./photos/logovn.png'),
+  	photo: require('./photos/bac.gif'),
   },
   {
   	name: 'Miền Trung',
-  	photo: require('./photos/logovn.png'),
+  	photo: require('./photos/trung.gif'),
   },
   {
   	name: 'Miền Nam',
-  	photo: require('./photos/logovn.png'),
+  	photo: require('./photos/nam.gif'),
   }
 ];
 

@@ -66,6 +66,9 @@ class LogIn extends Component {
   }
 
   handleNextButton() {
+    this.setState({
+      password: ''
+    })
     const { navigate } = this.props.navigation;
     const { emailAddress, password } = this.state;
 
@@ -78,7 +81,6 @@ class LogIn extends Component {
       .catch((error) => {
         this.setState({ formValid: false, loadingVisible: false });
       });
-
   }
 
   handleCloseNotification() {

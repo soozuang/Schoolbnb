@@ -1,6 +1,6 @@
 import {
   TabNavigator,
-  StackNavigator, 
+  StackNavigator,
   TabBarBottom,
 } from 'react-navigation';
 import ExploreContainer from '../containers/ExploreContainer';
@@ -15,27 +15,27 @@ import colors from '../styles/colors';
 export const ExploreTab = StackNavigator({
   ExploreContainer: { screen: ExploreContainer },
   CreateList: { screen: CreateList },
-  UniversityDetail: { screen: UniversityDetail}
+  UniversityDetail: { screen: UniversityDetail }
 },
-{
-  mode: 'modal',
-});
+  {
+    mode: 'modal',
+  });
 
 const LoggedInTabNavigator = TabNavigator({
   Explore: ExploreTab,
   Saved: { screen: SavedContainer },
-  Inbox: { screen:  InboxContainer },
-  Profile: { screen: ProfileContainer, navigationOptions: { header: { visible: false } }  },
+  Inbox: { screen: InboxContainer },
+  Profile: { screen: ProfileContainer },
 }, {
-  tabBarOptions: {
-  	labelStyle: {
-  	  fontWeight: '600',
-  	  marginBottom: 5,
-  	},
-    activeTintColor: colors.pink
-  },
-  tabBarComponent: TabBarBottom,
-  tabBarPosition: 'bottom',
-});
+    tabBarOptions: {
+      labelStyle: {
+        fontWeight: '600',
+        marginBottom: 5,
+      },
+      activeTintColor: colors.pink
+    },
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+  });
 
 export default LoggedInTabNavigator;

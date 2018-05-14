@@ -60,12 +60,12 @@ export default class TurnOnNotifications extends Component {
   	  <View style={styles.wrapper}>
   	    <View style={styles.content}>
   	      <Icon
-  	        name="comments-o"
+  	        name="check-circle"
   	        size={46}
   	        style={styles.icon}
   	      />
   	      <Text style={styles.title}>
-  	        Bật thông báo?
+  	        Chúc mừng đã đăng nhập thành công
   	      </Text>
   	      <Text style={styles.description}>
   	        Chúng tôi sẽ thông báo cho bạn những tin quan trọng
@@ -77,7 +77,7 @@ export default class TurnOnNotifications extends Component {
   	        onHideUnderlay={this.handleNotifyBtnHideUnderlay}
   	        underlayColor={colors.green02}
   	      >
-  	        <Text style={[{ color: colors.white }, styles.buttonText]}>Thông báo cho tôi</Text>
+  	        <Text style={[{ color: colors.white }, styles.buttonText]}>Bật thông báo</Text>
   	      </TouchableHighlight>
   	      <TouchableHighlight
   	        style={[{ backgroundColor: pressSkipBtn ? colors.gray01 : 'transparent' }, styles.skipButton]}
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
   },
   notifyButton: {
   	width: 160,
-  	paddingTop: 12,
-  	paddingBottom: 12,
+  	paddingTop: 10,
+  	paddingBottom: 10,
   	borderRadius: 3,
   	marginTop: 40,
   },
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   	borderColor: colors.green01,
   	width: 100,
   	borderWidth: 2,
-  	paddingTop: 12,
-  	paddingBottom: 12,
+  	paddingTop: 10,
+  	paddingBottom: 10,
   	borderRadius: 3,
   	marginTop: 15,
   }

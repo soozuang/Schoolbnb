@@ -11,7 +11,7 @@ import colors from '../styles/colors';
 
 export default class SavedContainer extends Component {
   static navigationOptions = {
-    tabBarLabel: 'SAVED',
+    tabBarLabel: 'ƯA THÍCH',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-heart-outline"
