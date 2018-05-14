@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   Dimensions,
   View,
+  Linking,
   Text,
   Image,
   TouchableOpacity,
@@ -24,15 +25,17 @@ import RadioInput from '../components/form/RadioInput';
 import RoundedButton from '../components/buttons/RoundedButton';
 import NavBarButton from '../components/buttons/NavBarButton';
 import Stars from '../components/Stars';
+import getDirections from 'react-native-google-maps-directions';
+import api_config from '../data/api_config'
+import call from 'react-native-phone-call'
 class UniversityDetail extends Component {
-
   static navigationOptions = ({ navigation }) => ({
     tabBarVisible: true,
     headerLeft: <TouchableOpacity
       style={styles.closeButton}
       onPress={() => navigation.goBack()}
     >
-      <Icon name="ios-arrow-back" color={colors.green01} size={30} style={styles.icon} />
+      <Icon name="ios-arrow-back" color={colors.darkOrange} size={30} style={styles.backbtn} />
     </TouchableOpacity>,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white,
@@ -40,7 +43,7 @@ class UniversityDetail extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-search"
-        size={22}
+        size={26}
         color={tintColor}
       />
     ),
@@ -48,23 +51,77 @@ class UniversityDetail extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       privacyOption: 'private',
-
+      latitude: null,
+      longitude: null,
+      error: null,
     };
-
     this.listCreated = false;
     this.selectPrivacyOption = this.selectPrivacyOption.bind(this);
+    this.onMapPress = this.onMapPress.bind(this);
   }
 
   componentWillUnmount() {
     const { navigation } = this.props;
     navigation.state.params.onDetailClose();
+    navigator.geolocation.clearWatch(this.watchId);
+  }
+
+  componentDidMount() {
+    this.watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 },
+    );
   }
 
   selectPrivacyOption(privacyOption) {
     this.setState({ privacyOption });
+  }
+
+  onWebPress(web) {
+    Linking.openURL(web)
+  }
+
+  onCallPres(phone) {
+    const args = {
+      number: phone, // String value with the number to call
+      prompt: false
+
+    }
+    call(args).catch(console.error)
+  }
+
+  onMapPress(lat, lng) {
+
+    const data = {
+      source: {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+      },
+      destination: {
+        latitude: lat,
+        longitude: lng
+      },
+      params: [
+        {
+          key: "travelmode",
+          value: "driving"        // may be "walking", "bicycling" or "transit" as well
+        },
+        {
+          key: "dir_action",
+          value: "navigate"       // this instantly initializes navigation using the given travel mode 
+        }
+      ]
+    }
+    getDirections(data)
   }
 
   render() {
@@ -76,48 +133,65 @@ class UniversityDetail extends Component {
       <View style={styles.wrapper}>
         <Image
           style={styles.canvas}
-          resizeMode="contain"
+          resizeMode='cover'
           source={{ uri: listing.banner }} />
-        <ScrollView style={styles.scrollView}>
 
-          <Text style={styles.heading}>{listing.tentruong}</Text>
-          <View style={styles.details}>
-            <Text
-              style={styles.listingTitle}
-            >
-              {listing.tentruong2}
-            </Text>
-            <Image
-              style={styles.image}
-              resizeMode="contain"
-              source={{ uri: listing.logo }} />
-            <Stars
-              size={16}
-              color={colors.green02}
+        <Text style={styles.heading}>{listing.tentruong}</Text>
+        <Text style={styles.listingTitle}>| {listing.tentruong2} |</Text>
+        <Image
+          style={[styles.image, { textAlign: 'center' }]}
+          resizeMode='contain'
+          source={{ uri: listing.logo }} />
+        <View style={styles.center}>
+          <Stars
+            votes={10}
+            size={16}
+            color={colors.green02} />
+
+          <View style={styles.funcBar}>
+            <Icon
+              onPress={() => this.onMapPress(listing.lat, listing.lng)}
+              name="ios-map"
+              size={36}
+              color={colors.darkOrange}
+
+            />
+            <Icon
+              onPress={() => this.onWebPress(listing.website)}
+              name="ios-link"
+              size={36}
+              color={colors.darkOrange}
+              style={styles.icon}
+            />
+            <Icon
+              onPress={() => this.onCallPress(listing.dienthoai)}
+              name="ios-call"
+              size={36}
+              color={colors.darkOrange}
+              style={styles.icon}
             />
           </View>
+        </View>
 
+        <ScrollView style={styles.scrollView}>
           <View style={styles.rowInfo}>
             <Icon
-              name="ios-browsers"
-              size={30}
+              name="ios-medal"
+              size={24}
               color={colors.darkOrange}
               style={styles.icon}
             />
-            <Text>{listing.loai}</Text>
+            <Text style={styles.infoMini}>{listing.loai}</Text>
           </View>
-
           <View style={styles.rowInfo}>
-            <FontAwesomeIcon
-              name="dollar"
-              size={30}
+            <Icon
+              name="ios-podium"
+              size={24}
               color={colors.darkOrange}
               style={styles.icon}
             />
-            <Text>{listing.taichinh} đồng mỗi năm</Text>
+            <Text style={styles.infoMini}>{listing.taichinh} đồng/ năm</Text>
           </View>
-
-
         </ScrollView>
       </View>
     );
@@ -125,65 +199,78 @@ class UniversityDetail extends Component {
 };
 
 const styles = StyleSheet.create({
+  infoMini: {
+    fontSize: 18,
+    color: '#020202',
+    marginLeft: 20
+  },
   wrapper: {
-    flex: 1,
     backgroundColor: colors.white,
+    flex: 1
   },
 
-  details: {
-    flex: 1,
+  center: {
     flexDirection: 'column',
-    alignItems: 'center',
-    marginBottom: 5,
+    alignContent: 'center',
+    alignItems: 'center'
   },
 
   heading: {
-    fontSize: 20,
-    fontWeight: '800',
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 15,
+    fontSize: 22,
+    fontWeight: '600',
     color: colors.lightBlack,
-    marginBottom: 4,
+    marginBottom: 10,
     textAlign: 'center'
   },
 
-  icon: {
-    position: 'absolute',
+  backbtn: {
     marginLeft: 20,
+    zIndex: 100
   },
 
   scrollView: {
-    paddingBottom: 40,
-    marginHorizontal: 20,
+    marginTop: 10,
   },
 
   image: {
-    width: undefined,
-    flex: 1,
-    height: 100,
+    height: 70,
     borderRadius: 8,
-    marginBottom: 7
+    marginBottom: 7,
   },
 
   canvas: {
     width: Dimensions.get('window').width,
-    flex: 1,
-    height: undefined,
+    flex: 1
   },
 
   listingTitle: {
     fontSize: 14,
-    marginBottom: 4
+    marginBottom: 10,
+    textAlign: 'center'
   },
 
   rowInfo: {
-    marginRight: 20,
-    marginTop: 5,
-    flex: 1,
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
 
   icon: {
-    marginRight: 30
+    marginLeft: 40,
+  },
+
+  funcBar: {
+    margin: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomColor: '#a3a3a3',
+    borderBottomWidth: 1,
+    paddingBottom: 10,
+    paddingLeft: 25,
+    paddingRight: 25
   }
 
 });

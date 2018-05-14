@@ -47,9 +47,9 @@ export default class Listings extends Component {
             <Text style={styles.listingPrice}>{listing.matruong}</Text>
             <View style={styles.fav_star}>
               <Stars
-                //votes={listing.stars}
+                votes={listing.stars}
                 size={10}
-                color={colors.green02}
+                color={colors.gold}
               />
               <View style = {styles.heartbtn}>
                 <HeartButton

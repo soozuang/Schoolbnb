@@ -13,7 +13,7 @@ export default class InboxContainer extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-archive-outline"
-        size={25}
+        size={26}
         color={tintColor}
       />
     ),

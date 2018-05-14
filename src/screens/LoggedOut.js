@@ -32,7 +32,7 @@ export default class LoggedOut extends Component {
   }
 
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('TurnOnNotifications')} location="right" color={colors.white} text="Đăng nhập" />,
+    headerRight: <NavBarButton handleButtonPress={() => navigation.navigate('LogIn')} location="right" color={colors.white} text="Đăng nhập" />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white,
   });

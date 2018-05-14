@@ -13,7 +13,7 @@ export default class TripsContainer extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-ionic"
-        size={21}
+        size={26}
         color={tintColor}
       />
     ),

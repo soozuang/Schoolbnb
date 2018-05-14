@@ -66,12 +66,8 @@ class LogIn extends Component {
   }
 
   handleNextButton() {
-    this.setState({
-      password: ''
-    })
     const { navigate } = this.props.navigation;
     const { emailAddress, password } = this.state;
-
     firebaseApp.auth().signInWithEmailAndPassword(emailAddress, password)
       .then(() => {
         this.setState({ formValid: true, loadingVisible: false })

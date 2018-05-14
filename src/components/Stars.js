@@ -19,7 +19,7 @@ export default class Stars extends Component {
         <Icon
           name="star"
           size={size}
-          color={starsNumber > i ? color : colors.gray02}
+          color={starsNumber > i ? colors.gold : colors.gray01}
           style={styles.star}
         />
       );
@@ -33,7 +33,6 @@ export default class Stars extends Component {
   	  <View style={styles.wrapper}>
   	    <View style={styles.stars}>
   	      {this.stars}
-  	      {votes ? <Text style={styles.votesNumber}>{votes}</Text> : null}
   	    </View>
   	  </View>
   	);

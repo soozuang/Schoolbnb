@@ -15,7 +15,7 @@ export default class SavedContainer extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-heart-outline"
-        size={22}
+        size={26}
         color={tintColor}
       />
     ),

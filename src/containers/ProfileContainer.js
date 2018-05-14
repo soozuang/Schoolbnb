@@ -13,7 +13,7 @@ export default class ProfileContainer extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name="ios-contact-outline"
-        size={22}
+        size={26}
         color={tintColor}
       />
     ),
